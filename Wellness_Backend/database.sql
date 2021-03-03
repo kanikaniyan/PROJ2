@@ -9,10 +9,12 @@ Password varchar(20),
 Email varchar(40),
 Role varchar(5),
 Status varchar(10),
-IsOnline boolean,
+Online boolean,
 Enabled boolean,
 primary key (UserId)
 );
+drop table user;
+select * from user;
 
 create table Blog (
 	BlogId int not null auto_increment,
@@ -28,6 +30,7 @@ create table Blog (
     foreign key(UserId) references User(UserId),
     primary key(BlogId)
 );
+drop table blog;
 
 create table BlogComments (
 	BlogCommentsId int not null auto_increment,
@@ -38,12 +41,13 @@ create table BlogComments (
     NoOfLikes int,
     BlogComments varchar(300),
     CurrentDate date,
+    BlogId int,
     foreign key(UserId) references User(UserId),
     primary key(BlogCommentsId)
 );
 
 select * from blogcomments;
-
+drop table blogcomments;
 create table Job(
 	JobId int not null auto_increment,
     JobName varchar(30),

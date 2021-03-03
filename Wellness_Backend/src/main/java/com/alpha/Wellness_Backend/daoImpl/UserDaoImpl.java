@@ -27,8 +27,7 @@ public class UserDaoImpl implements IUserDao{
 
 	@Override
 	public List<User> getAllUsers() {
-		
-		return sessionFactory.getCurrentSession().createQuery("from user", User.class).getResultList();
+		return sessionFactory.getCurrentSession().createQuery("from User", User.class).getResultList();
 	}
 
 	@Override
@@ -50,9 +49,18 @@ public class UserDaoImpl implements IUserDao{
 		Query query=sessionFactory.getCurrentSession().createQuery(q);
 		try {
 			user= (User)query.getSingleResult();
+			
+			//updating the user online status
+			user.setIsOnline(true);
+			sessionFactory.getCurrentSession().update(user);
+			
+			//retrieving the result after updating the online status
+			user= (User)query.getSingleResult();
+			System.out.println("success");
 			return user;
 		}
 		catch (Exception e) {
+			System.out.println("falied");
 			e.printStackTrace();
 			return null;
 		}
@@ -62,6 +70,7 @@ public class UserDaoImpl implements IUserDao{
 	public boolean addUser(User user) {
 		try {
 			sessionFactory.getCurrentSession().save(user);
+			System.out.println(user);
 			return true;
 		}
 		catch(Exception ex) {
@@ -99,6 +108,7 @@ public class UserDaoImpl implements IUserDao{
 		try {
 			User user=getUserById(userId);
 			user.setEnabled(false);
+			user.setStatus("Inactive");
 			sessionFactory.getCurrentSession().update(user);
 			return true;
 		}
@@ -122,6 +132,31 @@ public class UserDaoImpl implements IUserDao{
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public boolean activateUser(int userId) {
+		try {
+			User user=getUserById(userId);
+			user.setEnabled(true);
+			user.setStatus("Active");
+			sessionFactory.getCurrentSession().update(user);
+			return true;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public List<User> getAllDeactivateUser() {
+		return sessionFactory.getCurrentSession().createQuery("from User where role='user' and enabled=false", User.class).getResultList();
+	}
+
+	@Override
+	public List<User> getAllActiveUser() {
+		return sessionFactory.getCurrentSession().createQuery("from User where role='user' and enabled=true", User.class).getResultList();
 	}
 	
 }

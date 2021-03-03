@@ -66,5 +66,18 @@ public class UserServiceImpl implements IUserService{
 	public boolean updateUserProfile(String file, Integer userId) {
 		return userDao.updateUserProfile(file, userId);
 	}
+
+	public boolean activateUser(int userId) {
+		return userDao.activateUser(userId);
+	}
+
+	public List<User> getAllDeactivateUser() {
+		return userDao.getAllDeactivateUser();
+	}
+
+	@Override
+	public List<User> getAllActiveUser() {
+		return userDao.getAllActiveUser();
+	}
 	
 }	

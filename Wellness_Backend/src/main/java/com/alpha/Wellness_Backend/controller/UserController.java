@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alpha.Wellness_Backend.model.User;
@@ -28,24 +29,49 @@ public class UserController {
 		return userService.addUser(user);
 	}
 	
+	@PostMapping("validate-user")
+	public User validateUser(@RequestBody User user) {
+		return userService.validateUser(user);
+	}
+	
 	@GetMapping("user-list")
 	public List<User> allUsers() {
 		return userService.getAllUsers();
 	}
 	
-	@DeleteMapping("delete-user/{user_id}")
-	public boolean deleteUser(@PathVariable("user_id") int user_id) {
+	@DeleteMapping("delete-user/{userId}")
+	public boolean deleteUser(@PathVariable("userId") int user_id) {
 		return userService.deleteUser(user_id);
 	}
 	
-	@GetMapping("user/{user_id}")
-	public User userById(@PathVariable("user_id") int user_id) {
+	@GetMapping("user/{userId}")
+	public User userById(@PathVariable("userId") int user_id) {
 		return userService.getUserById(user_id);
 	}
 	
-	@PostMapping("update-user/{user_id}")
-	public boolean updateUser(@RequestBody User user, @PathVariable("user_id") int user_id) {
+	@PostMapping("update-user/{userId}")
+	public boolean updateUser(@RequestBody User user, @PathVariable("userId") int user_id) {
 		user.setUserId(user_id);
 		return userService.updateUser(user);
+	}
+	
+	@GetMapping("deactivate-list")
+		public List<User> AllDeactivateUser() {
+		return userService.getAllDeactivateUser();
+	}
+	
+	@GetMapping("activate-list")
+	public List<User> AllActivateUser() {
+	return userService.getAllActiveUser();
+	}
+	
+	@PostMapping("activate-user/{userId}")
+	public boolean activateUser(@RequestBody User user, @PathVariable("userId") int user_id) {
+		return userService.activateUser(user_id);
+	}
+	
+	@PostMapping("deactivate-user/{userId}")
+	public boolean deActivateUser(@RequestBody User user, @PathVariable("userId") int user_id) {
+		return userService.deactivateUser(user_id);
 	}
 }

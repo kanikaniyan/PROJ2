@@ -15,5 +15,8 @@ public interface IUserDao {
 	boolean updateUser(User user);
 	boolean deleteUser(int userId);
 	boolean deactivateUser(int userId);
+	boolean activateUser(int userId);
+	List<User> getAllDeactivateUser();
+	List<User> getAllActiveUser();
 	boolean updateUserProfile(String file, Integer userId);
 }

@@ -2,11 +2,16 @@ package com.alpha.Wellness_Backend.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity
 public class User extends DomainResponse implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -18,8 +23,6 @@ public class User extends DomainResponse implements Serializable{
 	private String lastName;
 	private String username;
 	private String password;
-	@Transient
-	private String confirmPassword;
 	private String email;
 	private String role;
 	private String status;
@@ -56,12 +59,6 @@ public class User extends DomainResponse implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -80,11 +77,11 @@ public class User extends DomainResponse implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public boolean isOnline() {
+	public boolean isIsOnline() {
 		return isOnline;
 	}
-	public void setOnline(boolean isOnline) {
-		this.isOnline = isOnline;
+	public void setIsOnline(boolean isIsOnline) {
+		this.isOnline = isIsOnline;
 	}
 	public boolean isEnabled() {
 		return enabled;
