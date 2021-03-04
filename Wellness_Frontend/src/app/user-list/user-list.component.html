@@ -1,0 +1,156 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 style="text-align: center;">Users</h1><br>
+        <div class="row" [hidden]="!deleteMessage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong>User Data Deleted</strong>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+    
+    <div class="panel-body">
+        <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger">
+            <thead class="thead-light">
+                <tr>
+                    <th>UserID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>IsOnline</th>
+                    <th>Enabled</th>
+                    <th style="width: 260px;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.userId}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.status}}</td>
+                    <td>{{user.isOnline}}</td>
+                    <td>{{user.enabled}}</td>
+                    <td style="text-align: center;">
+                        <button (click)="deleteUser(user.userId)" class="btn btn-primary" data-backdrop="false" style="background-color: rgb(250, 95, 24);">
+                        <i class="fa fa-fuboll-0">Delete</i>
+                        </button>&nbsp;
+                        <button (click)="updateUser(user.userId)" class="btn btn-info" data-backdrop="false"
+                            data-toggle="modal" data-target="#myModal" style="background-color: rgb(42, 196, 88)">
+                            <i class="fa fa-fuboll-0">Update</i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="userUpdateForm" #UpdatUser (ngSubmit)="updatUser()">
+                <!--Model Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center;">Update User</h4>
+                </div>
+
+                <!--Model-body-->
+                <div class="modal-body" *ngIf="userList">
+                    <div [hidden]="isUpdated">
+                        
+                            <div class="form-group">
+                                <label for="name">User Id</label>
+                                <input type="text" class="form-control" formControlName="userId"
+                                [(ngModel)]="userList.userId">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">First Name</label>
+                                <input type="text" class="form-control" formControlName="firstName"
+                                    [(ngModel)]="userList.firstName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Last Name</label>
+                                <input type="text" class="form-control" formControlName="lastName"
+                                    [(ngModel)]="userList.lastName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Username</label>
+                                <input type="text" class="form-control" formControlName="username"
+                                    [(ngModel)]="userList.username">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Password</label>
+                                <input type="password" class="form-control" formControlName="password"
+                                    [(ngModel)]="userList.password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Email</label>
+                                <input type="text" class="form-control" formControlName="email"
+                                    [(ngModel)]="userList.email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Role</label>
+                                <select class="form-control" formControlName="role" required>
+                                    <option value="User" [selected]="'User'==userList.role">User</option>
+                                    <option value="Admin" [selected]="'Admin'==userList.role">Admin</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Status  :</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <label for="status">
+                                    <input type="text" class="form-control" readonly [(ngModel)]="userList.status" formControlName="status" style="border: none; box-shadow: none;">
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Enabled  :</label> &nbsp;
+                                <label for="enabled">
+                                    <input type="text" class="form-control" readonly [(ngModel)]="userList.enabled" formControlName="enabled" style="border: none; box-shadow: none;">
+                                </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label for="name">IsOnline  :</label> &nbsp;
+                                    <label for="isOnline">
+                                        <input type="text" class="form-control" readonly [(ngModel)]="userList.isOnline" formControlName="isOnline" style="border: none; box-shadow: none;">
+                                    </label>
+                            </div>
+
+                    </div>
+                    <div [hidden]="!isUpdated">
+                        <h4>User Details Updated!</h4>
+                    </div>
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer" style="margin-top: -4%; height: 5%;">
+                    <button type="submit" class="btn btn-success"
+                        [hidden]="isUpdated">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="changeIsUpdated()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
