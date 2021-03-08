@@ -49,13 +49,13 @@ public class UserDaoImpl implements IUserDao{
 		Query query=sessionFactory.getCurrentSession().createQuery(q);
 		try {
 			user= (User)query.getSingleResult();
-			
-			//updating the user online status
 			user.setIsOnline(true);
-			sessionFactory.getCurrentSession().update(user);
-			
-			//retrieving the result after updating the online status
-			user= (User)query.getSingleResult();
+//			//updating the user online status
+//			user.setIsOnline(true);
+//			sessionFactory.getCurrentSession().update(user);
+//			
+//			//retrieving the result after updating the online status
+//			user= (User)query.getSingleResult();
 			System.out.println("success");
 			return user;
 		}

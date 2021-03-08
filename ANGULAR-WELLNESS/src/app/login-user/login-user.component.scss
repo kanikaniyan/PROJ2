@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+span {
+	font-size: 12px;
+}
+
+.signin-container {
+    transition: transform 0.6s ease-in-out;
+    transform: translateX(0%);
+}
+
+h1 {
+    font-weight: bold;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #ff4b2b;
+    background-color: #ff4b2b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 12px 45px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 50px;
+    height: 100%;
+    text-align: center;
+}
+
+.login input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.login {
+    padding-bottom: 7px;
+    width: 100%;
+    position: relative;
+}
+
+.login #icons {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.login small {
+    position: absolute;
+    font-family: 'Open Sans', sans-serif;
+    color: #ff4b2b;
+    top: 41px;
+    bottom: 0;
+    left: 0;
+}
+
+.login .form-control.ng-touched.ng-invalid {
+    border:1px solid red;
+    border-left:5px solid #ff4b2b;
+}
+
+@keyframes hide {
+	0%, 20% {
+		opacity: 0.8;
+		z-index: 5;
+	}
+	
+	21%, 30% {
+		opacity: 0.5;
+		z-index: 3;
+	}
+
+    31%, 50% {
+		opacity: 0.3;
+		z-index: 1;
+	}
+
+    51%, 100% {
+		opacity: 0;
+		z-index: 1;
+	}
+}
+
+// login success
+
+.lo {
+    margin-top: -120%;
+    // background: linear-gradient(to right, #e9f0fc, #d7d9fa);
+    transition: transform 1.5s ease-in-out;
+    transform: translateX(150%);
+    opacity: 0;
+	z-index: 1;
+    animation: yes1 0.6s;
+    visibility: hidden;
+}
+
+.lo div div {
+    padding-left: 25%;
+    padding-bottom: 100%;
+    padding-top: 70%;
+}
+
+.lo div div h3 {
+    position: absolute;
+    left: 8%;
+    bottom: 80%;
+    width: 100%;
+    color: #a14fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+h4 {
+    position: absolute;
+    left: 10%;
+    bottom: 65%;
+    font-weight: bold;
+}
+
+.lo .rodown {
+    transition: transform 0.8s ease-in-out;
+    transform: translateX(-200%);
+}
+
+@keyframes yes1 {
+	0%, 50% {
+		opacity: 0.9;
+		z-index: 5;
+	}
+	
+    51%, 70% {
+		opacity: 0.6;
+		z-index: 4;
+	}
+
+    71%, 80% {
+		opacity: 0.4;
+		z-index: 3;
+	}
+
+    81%, 99% {
+		opacity: 0.3;
+		z-index: 1;
+	}
+
+    99%, 100% {
+		opacity: 0;
+		z-index: 1;
+        visibility: hidden;
+	}
+}

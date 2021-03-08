@@ -1,0 +1,63 @@
+<div *ngIf="currentUser">
+    <div *ngIf="currentUser.role=='Admin'">
+        <mat-nav-list>
+            <div class="profile-card">
+                <div class="header">
+                    <h2>{{currentUser.firstName}}</h2>
+                    <h4>{{currentUser.email}}</h4>
+                </div>
+
+                <div *ngIf="retrievedImage">
+                    <img [src]="retrievedImage" alt="Kaniyan Pandiarasan">
+                    </div>
+                    <div *ngIf="!retrievedImage">
+                      <img src="../../assets/dummy.png">
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <h2 matSubheader>Access to {{currentUser.role}}</h2>
+
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="active-user-list">Activate User</a>
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="deactive-user-list">Active Users</a>
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="user-list">Users List</a>
+            <a mat-list-item routerLinkActive="list-item-active">Approve a Blog</a>
+            
+            <mat-divider></mat-divider>
+
+        </mat-nav-list>
+    </div>
+</div>
+
+<div *ngIf="currentUser">
+    <div *ngIf="currentUser.role=='User'">
+        <mat-nav-list>
+            <div class="profile-card">
+                <div class="header">
+                    <h2>{{currentUser.firstName}}</h2>
+                    <h4>{{currentUser.email}}</h4>
+                </div>
+                
+                <div *ngIf="retrievedImage">
+                    <img [src]="retrievedImage" alt="Kaniyan Pandiarasan">
+                    </div>
+                    <div *ngIf="!retrievedImage">
+                      <img src="../../assets/dummy.png">
+                </div>
+            </div>
+        
+            <mat-divider></mat-divider>
+        
+            <h2 matSubheader>Access to {{currentUser.role}}</h2>
+        
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="active-user-list">Blog Posts</a>
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="deactive-user-list">Create a Blog</a>
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="user-list">Apply Jobs</a>
+            <a mat-list-item routerLinkActive="list-item-active">Approved Blogs</a>
+            
+            <mat-divider></mat-divider>
+        
+        </mat-nav-list>
+    </div>
+</div>

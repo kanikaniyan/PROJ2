@@ -1,0 +1,207 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Your Profile</h1>
+  <mat-grid-list cols="2" rowHeight="370px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu" *ngIf="card.title=='Information'">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="updateUser(currentUser.userId)" data-backdrop="false"
+              data-toggle="modal" data-target="#myModal">Edit</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content class="dashboard-card-content" *ngIf="currentUser && card.title=='Profile'">
+          <br/>
+          <div class="profile1 lefte">
+            
+            <div *ngIf="retrievedImage">
+            
+              <img [src]="retrievedImage" alt="Kaniyan Pandiarasan" mat-icon-button class="more-button" 
+              [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+            
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item (click)="delete()">Remove Photo</button>
+              </mat-menu>
+
+            </div>
+            
+            <div *ngIf="!retrievedImage">
+              
+              <img src="../../assets/dummy.png" mat-icon-button class="more-button" 
+                [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item (click)="upload()">Upload Photo</button>
+                </mat-menu>
+                
+            </div>
+
+            <div class="left">@{{currentUser.username}}</div>
+            
+            <div [hidden]="show" class="file">
+              <input id='upload' type='file' (change)='onFileChanged($event)'/>
+              <input id='upload1' type='button' (click)='onUpload()' value='upload'/>
+            </div>
+
+          </div>
+
+          <div class="profile1">
+            <label for="name" class="right" style="font-size: 20px;">{{currentUser.firstName}}</label>
+          </div>
+
+          <div class="profile1">
+            <label for="name" class="right" style="font-size: 20px;">{{currentUser.role}}</label>
+          </div>
+
+        </mat-card-content>
+
+
+        <mat-card-content class="dashboard-card-content" *ngIf="currentUser && card.title=='Information'">
+          <br/>
+          <div class="profile">
+            <label class="left">FirstName</label>
+            <label class="right">{{currentUser.firstName}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">LastName</label>
+            <label class="right">{{currentUser.lastName}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">Username</label>
+            <label class="right">{{currentUser.username}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">Password</label>
+            <label class="right">{{currentUser.password}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">Email</label>
+            <label class="right">{{currentUser.email}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">Role</label>
+            <label class="right">{{currentUser.role}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">Status</label>
+            <label class="right">{{currentUser.status}}</label>
+          </div>
+
+          <div class="profile">
+            <label class="left">IsOnline</label>
+            <label class="right">{{currentUser.isOnline}}</label>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="userUpdateForm" #UpdatUser (ngSubmit)="updatUser()">
+                <!--Model Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center;">Update User</h4>
+                </div>
+
+                <!--Model-body-->
+                <div class="modal-body" *ngIf="currentUser">
+                    <div [hidden]="isUpdated">
+                        
+                            <div class="form-group">
+                                <label for="name">User Id</label>
+                                <input type="text" class="form-control" formControlName="userId"
+                                [(ngModel)]="currentUser.userId">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">First Name</label>
+                                <input type="text" class="form-control" formControlName="firstName"
+                                    [(ngModel)]="currentUser.firstName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Last Name</label>
+                                <input type="text" class="form-control" formControlName="lastName"
+                                    [(ngModel)]="currentUser.lastName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Username</label>
+                                <input type="text" class="form-control" formControlName="username"
+                                    [(ngModel)]="currentUser.username">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Password</label>
+                                <input type="password" class="form-control" formControlName="password"
+                                    [(ngModel)]="currentUser.password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Email</label>
+                                <input type="text" class="form-control" formControlName="email"
+                                    [(ngModel)]="currentUser.email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Role</label>
+                                <select class="form-control" formControlName="role" required>
+                                    <option value="User" [selected]="'User'==currentUser.role">User</option>
+                                    <option value="Admin" [selected]="'Admin'==currentUser.role">Admin</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Status  :</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <label for="status">
+                                    <input type="text" class="form-control" readonly [(ngModel)]="currentUser.status" formControlName="status" style="border: none; box-shadow: none;">
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Enabled  :</label> &nbsp;
+                                <label for="enabled">
+                                    <input type="text" class="form-control" readonly [(ngModel)]="currentUser.enabled" formControlName="enabled" style="border: none; box-shadow: none;">
+                                </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label for="name">IsOnline  :</label> &nbsp;
+                                    <label for="isOnline">
+                                        <input type="text" class="form-control" readonly [(ngModel)]="currentUser.isOnline" formControlName="isOnline" style="border: none; box-shadow: none;">
+                                    </label>
+                            </div>
+
+                    </div>
+                    <div [hidden]="!isUpdated" style="text-align: center;">
+                        <h2>User Details Updated!</h2>
+                    </div>
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer" style="margin-top: -4%; height: 5%;">
+                    <button type="submit" class="btn btn-success"
+                        [hidden]="isUpdated">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        (click)="changeIsUpdated()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

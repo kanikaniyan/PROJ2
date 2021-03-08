@@ -9,12 +9,21 @@ Password varchar(20),
 Email varchar(40),
 Role varchar(5),
 Status varchar(10),
-Online boolean,
+IsOnline boolean,
 Enabled boolean,
 primary key (UserId)
 );
 drop table user;
 select * from user;
+
+create table Image (
+id varchar(255) not null,
+data longblob,
+fileName varchar(255),
+fileType varchar(255),
+primary key (id)
+);
+select * from image;
 
 create table Blog (
 	BlogId int not null auto_increment,

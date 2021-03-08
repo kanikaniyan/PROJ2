@@ -2,6 +2,9 @@ package com.alpha.Wellness_Backend.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.alpha.Wellness_Backend.model.Image;
 import com.alpha.Wellness_Backend.model.User;
 
 public interface IUserService {
