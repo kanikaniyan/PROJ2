@@ -87,4 +87,9 @@ public class UserController {
 	public boolean deActivateUser(@RequestBody User user, @PathVariable("userId") int user_id) {
 		return userService.deactivateUser(user_id);
 	}
+	
+	@PostMapping("logout/{userId}")
+	public boolean logoutUser(@PathVariable("userId") int user_id) {
+		return userService.logoutUser(user_id);
+	}
 }

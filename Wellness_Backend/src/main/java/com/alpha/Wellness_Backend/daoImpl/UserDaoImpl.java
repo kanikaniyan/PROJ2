@@ -50,12 +50,6 @@ public class UserDaoImpl implements IUserDao{
 		try {
 			user= (User)query.getSingleResult();
 			user.setIsOnline(true);
-//			//updating the user online status
-//			user.setIsOnline(true);
-//			sessionFactory.getCurrentSession().update(user);
-//			
-//			//retrieving the result after updating the online status
-//			user= (User)query.getSingleResult();
 			System.out.println("success");
 			return user;
 		}
@@ -157,6 +151,20 @@ public class UserDaoImpl implements IUserDao{
 	@Override
 	public List<User> getAllActiveUser() {
 		return sessionFactory.getCurrentSession().createQuery("from User where role='user' and enabled=true", User.class).getResultList();
+	}
+
+	@Override
+	public boolean logoutUser(int userId) {
+		try {
+			User user=getUserById(userId);
+			user.setIsOnline(false);
+			sessionFactory.getCurrentSession().update(user);
+			return true;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 	
 }

@@ -79,5 +79,10 @@ public class UserServiceImpl implements IUserService{
 	public List<User> getAllActiveUser() {
 		return userDao.getAllActiveUser();
 	}
+
+	@Override
+	public boolean logoutUser(int userId) {
+		return userDao.logoutUser(userId);
+	}
 	
 }	

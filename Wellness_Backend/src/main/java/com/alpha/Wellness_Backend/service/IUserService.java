@@ -22,4 +22,5 @@ public interface IUserService {
 	List<User> getAllDeactivateUser();
 	boolean updateUserProfile(String file, Integer userId);
 	List<User> getAllActiveUser();
+	boolean logoutUser(int userId);
 }

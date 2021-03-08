@@ -67,6 +67,10 @@ export class UserService {
     removeImage(userId: number): Observable<object> {
       return this.http.delete(`http://localhost:8080/image/remove-image/${userId}`);
     }
+
+    logout(userId: number): Observable<any> {
+      return this.http.post(`${this.baseUrl}/logout/${userId}`, { responseType: 'text' });  
+    } 
   
 }
 

@@ -1,6 +1,7 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { data } from 'jquery';
 import { UserService } from '../user.service';
 
 @Component({
@@ -38,10 +39,14 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     setTimeout(()=> {
-      alert("You have successfully logged out");
-      
-    }),500;
-    this.router.navigateByUrl("/signin-signup");
+      this.router.navigateByUrl("/signin-signup");
+    }),20;
+    alert("You have successfully logged out");
+    this.userService.logout(this.currentUser.userId).subscribe(
+      data=> {
+        console.log(data);
+      }
+    );
   }
 
 }

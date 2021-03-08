@@ -19,4 +19,5 @@ public interface IUserDao {
 	List<User> getAllDeactivateUser();
 	List<User> getAllActiveUser();
 	boolean updateUserProfile(String file, Integer userId);
+	boolean logoutUser(int userId);
 }
