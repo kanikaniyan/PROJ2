@@ -31,6 +31,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
+import { CreateViewBlogsComponent } from './create-view-blogs/create-view-blogs.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     ActivateUserComponent,
     DeActivateUserComponent,
     AdminPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    CreateViewBlogsComponent
   ],
   imports: [
     BrowserModule,

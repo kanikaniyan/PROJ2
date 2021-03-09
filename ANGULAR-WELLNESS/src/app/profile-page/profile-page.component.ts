@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../user';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-profile-page',

@@ -7,7 +7,7 @@
     <div *ngIf="currentUser">
         <a mat-button [routerLink]="['profile-page', {'paramKey': currentUser.userId}]">Profile</a>
         <a mat-button>Blogs</a>
-        <a mat-button>create a blog</a>
+        <a mat-button [routerLink]="['create-view-blog', {'paramKey': currentUser.userId}]">create a blog</a>
         <a mat-button>About Us</a>
         <a mat-raised-button color="accent" (click)="logout()">Logout</a>
     </div>

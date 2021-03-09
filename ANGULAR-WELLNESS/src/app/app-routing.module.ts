@@ -9,6 +9,7 @@ import { DeActivateUserComponent } from './de-activate-user/de-activate-user.com
 import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { CreateViewBlogsComponent } from './create-view-blogs/create-view-blogs.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'signin-signup', pathMatch: 'full' },
@@ -22,7 +23,8 @@ const routes: Routes = [
         { path: 'user-list' , component: UserListComponent },
         { path: 'active-user-list', component: ActivateUserComponent },
         { path: 'deactive-user-list', component: DeActivateUserComponent },
-        { path: 'profile-page', component: ProfilePageComponent }
+        { path: 'profile-page', component: ProfilePageComponent },
+        { path: 'create-view-blog', component: CreateViewBlogsComponent }
       ]},
     
   { path: 'add-user', component: RegisterUserComponent },
