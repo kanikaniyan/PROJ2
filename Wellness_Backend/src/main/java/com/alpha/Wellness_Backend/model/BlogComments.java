@@ -2,6 +2,7 @@ package com.alpha.Wellness_Backend.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,9 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Component
 @Entity
@@ -29,10 +32,10 @@ public class BlogComments implements Serializable{
 	String title;
 	int noOfLikes;
 	String blogComment;
-	LocalDate currentDate;
+	Date currentDate;
 	@ManyToOne
 	@JoinColumn(name="BlogId")
-	@JsonManagedReference
+	@JsonBackReference
 	Blog blog;
 	
 	public String getBlogComment() {
@@ -41,10 +44,10 @@ public class BlogComments implements Serializable{
 	public void setBlogComment(String blogComment) {
 		this.blogComment = blogComment;
 	}
-	public LocalDate getCurrentDate() {
+	public Date getCurrentDate() {
 		return currentDate;
 	}
-	public void setCurrentDate(LocalDate currentDate) {
+	public void setCurrentDate(Date currentDate) {
 		this.currentDate = currentDate;
 	}
 	public Blog getBlog() {

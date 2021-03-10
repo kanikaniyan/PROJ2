@@ -1,11 +1,11 @@
 <div class="grid-container">
   <h1 class="mat-h1" style="text-align: center;">Blog Community</h1>
   <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card" *ngIf="card.title=='Create a Blog'">
+    <mat-grid-tile [colspan]=2 [rowspan]=1>
+      <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title}}
+            Create a Blog
             <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
@@ -16,14 +16,19 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>
-            <h2><span><input type="text" placeholder="Title" style="width: 30%; text-align: center;"></span></h2>
-            <h3><span><textarea maxlength="500" rows="5" placeholder="Share your Thoughts and Ideas" style="width: 65%;"></textarea></span></h3>
-          </div>
+          <form [formGroup]="blogForm" class="form" action="#" #validateuser="ngForm" (ngSubmit)="posting()">
+            <h2><span><input type="text" class="formControl" formControlName="title" placeholder="Title"
+              style="width: 30%; text-align: center;"></span></h2>
+            <h3><span><textarea maxlength="500" rows="5" class="formControl" formControlName="description"
+              placeholder="Share your Thoughts and Ideas" style="width: 65%;"></textarea></span></h3>
+            
+            <button type="submit" class="btn">post your blog</button>
+          </form>
         </mat-card-content>
+        <h2 class="success">your blog has been submitted for approval</h2>
       </mat-card>
 
-      <mat-card class="dashboard-card2" *ngIf="card.title=='Card 2'">
+      <!-- <mat-card class="dashboard-card2" *ngIf="card.title=='Card 2'">
         <mat-card-header>
           <mat-card-title>
             {{card.title}}
@@ -34,8 +39,40 @@
             
           </div>
         </mat-card-content>
-      </mat-card>
+      </mat-card> -->
 
     </mat-grid-tile>
+  </mat-grid-list>  
+
+  <mat-grid-list cols="3" rowHeight="400px">
+    <mat-grid-tile *ngFor="let blog of blogList" [colspan]=1 [rowspan]=1>
+      <mat-card class="dashboard-card-post">
+        <mat-card-header>
+          <mat-card-title>
+            
+            <div *ngIf="retrievedImage.userId==blog.userId">
+              <img [src]="retrievedImage">
+            </div>
+            <div *ngIf="retrievedImage.userId!=blog.userId">
+              <img src="../../assets/dummy.png">
+            </div>
+            
+            <div class="username">
+              @{{blog.username}}
+            </div> 
+            <br/><br/><br/>
+            <mat-divider></mat-divider>
+            <br/>
+            {{retrievedImage.userId}}
+            <div style="text-align: justify;">
+              {{blog.blogContent}}
+          </div>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="">
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>    
+
   </mat-grid-list>
 </div>

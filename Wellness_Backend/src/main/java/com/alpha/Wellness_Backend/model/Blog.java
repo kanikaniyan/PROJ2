@@ -1,7 +1,8 @@
 package com.alpha.Wellness_Backend.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,12 @@ import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Component
 @Entity
@@ -26,7 +32,8 @@ public class Blog extends DomainResponse implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int blogId;
 	String blogTitle, blogContent;
-	LocalDate blogPosted;
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	LocalDateTime blogPosted;
 	String status;
 	int noOfLikes, noOfComments, noOfViews;
 	int userId;
@@ -34,6 +41,7 @@ public class Blog extends DomainResponse implements Serializable{
 	@OneToMany(mappedBy = "blog", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JsonManagedReference
 	List<BlogComments> blogComments;
+	
 	public int getBlogId() {
 		return blogId;
 	}
@@ -52,10 +60,12 @@ public class Blog extends DomainResponse implements Serializable{
 	public void setBlogContent(String blogContent) {
 		this.blogContent = blogContent;
 	}
-	public LocalDate getBlogPosted() {
+	
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	public LocalDateTime getBlogPosted() {
 		return blogPosted;
 	}
-	public void setBlogPosted(LocalDate blogPosted) {
+	public void setBlogPosted(LocalDateTime blogPosted) {
 		this.blogPosted = blogPosted;
 	}
 	public String getStatus() {

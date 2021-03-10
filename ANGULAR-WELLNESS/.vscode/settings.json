@@ -2,10 +2,13 @@
     "cSpell.ignoreWords": [
         "datatables",
         "deactive",
+        "lodown",
+        "loginform",
         "mat",
         "module",
         "sidenav",
         "signin",
-        "signup"
+        "signup",
+        "validateuser"
     ]
 }

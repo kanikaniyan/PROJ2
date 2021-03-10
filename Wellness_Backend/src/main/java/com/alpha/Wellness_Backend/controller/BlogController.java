@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alpha.Wellness_Backend.model.Blog;
-import com.alpha.Wellness_Backend.model.User;
+import com.alpha.Wellness_Backend.model.BlogComments;
 import com.alpha.Wellness_Backend.service.IBlogService;
 
 @RestController
@@ -24,12 +24,13 @@ public class BlogController {
 	@Autowired
 	IBlogService blogService;
 	
-	@PostMapping("save-blog")
+	@PostMapping("add-blog")
 	public boolean saveBlog(@RequestBody Blog blog ) {
+		System.out.println(blog.getBlogPosted());
 		return blogService.addBlog(blog);
 	}
 
-	@PostMapping("blog-list")
+	@GetMapping("blog-list")
 	public List<Blog> allBlogs() {
 		return blogService.getAllBlogs();
 	}

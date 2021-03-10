@@ -27,19 +27,18 @@ select * from image;
 
 create table Blog (
 	BlogId int not null auto_increment,
-    BlogTitle varchar(20),
-    BlogContent varchar(300),
-    BlogPosted date,
+    BlogTitle varchar(50),
+    BlogContent varchar(550),
+    BlogPosted datetime,
     Status varchar(10),
     NoOfLikes int,
     NoOfComments int,
     NoOfViews int,
     UserId int,
     UserName varchar(20),
-    foreign key(UserId) references User(UserId),
     primary key(BlogId)
 );
-drop table blog;
+select * from blog;
 
 create table BlogComments (
 	BlogCommentsId int not null auto_increment,
@@ -51,7 +50,6 @@ create table BlogComments (
     BlogComments varchar(300),
     CurrentDate date,
     BlogId int,
-    foreign key(UserId) references User(UserId),
     primary key(BlogCommentsId)
 );
 
