@@ -1,3 +1,4 @@
+<div class="background">
 <div class="grid-container">
   <h1 class="mat-h1" style="text-align: center;">Blog Community</h1>
   <mat-grid-list cols="2" rowHeight="350px">
@@ -44,35 +45,52 @@
     </mat-grid-tile>
   </mat-grid-list>  
 
-  <mat-grid-list cols="3" rowHeight="400px">
+  <mat-grid-list cols="3" rowHeight="500px">
     <mat-grid-tile *ngFor="let blog of blogList" [colspan]=1 [rowspan]=1>
       <mat-card class="dashboard-card-post">
         <mat-card-header>
           <mat-card-title>
             
-            <div *ngIf="retrievedImage.userId==blog.userId">
+            <!-- <div *ngIf="retrievedImage.userId==blog.userId">
               <img [src]="retrievedImage">
-            </div>
-            <div *ngIf="retrievedImage.userId!=blog.userId">
+            </div> -->
+            <!-- <div>
               <img src="../../assets/dummy.png">
-            </div>
+            </div> -->
             
             <div class="username">
-              @{{blog.username}}
+              @{{blog.username}}<br/>
             </div> 
+            <div class="date">
+              <div *ngIf="blog.blogPosted">
+                {{convert |  date:'medium'}}
+                <div *ngIf="posted(blog.blogPosted)">
+                  
+                </div>
+              </div>
+            </div>
+
             <br/><br/><br/>
-            <mat-divider></mat-divider>
+            <mat-divider style="position: absolute; left: 18%; top: 15%; width: 82%; border-top-width: 2px;"></mat-divider>
             <br/>
-            {{retrievedImage.userId}}
-            <div style="text-align: justify;">
+            <div class="title">{{blog.blogTitle}}</div><br/>
+            <div class="content">
               {{blog.blogContent}}
           </div>
+          <mat-card-footer>
+            <mat-divider style="position: absolute; left: 0%; bottom: 10%; width: 100%; border-top-width: 2px;"></mat-divider>
+
+            <span><button [hidden]="dislike" mat-icon-button class="dislike" (click)="liked(blog.blogId)">
+              <mat-icon style="font-size: 25px; color: lightgoldenrodyellow;">favorite</mat-icon>
+            </button></span>
+            <span><button [hidden]="!dislike" mat-icon-button class="like" (click)="disliked(blog.blogId)">
+              <mat-icon style="font-size: 25px; color: red;">favorite</mat-icon>
+            </button></span>
+          </mat-card-footer>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="">
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>    
-
+      </mat-card>
+    </mat-grid-tile>    
   </mat-grid-list>
+</div>
 </div>

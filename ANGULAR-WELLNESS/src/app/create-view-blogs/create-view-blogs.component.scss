@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+.background {
+  margin: -20px 0;
+  background: linear-gradient(to right, #f7edc0, #ead3f0, #f0c1fa);
+}
+
 .grid-container {
   margin: 20px;
 }
@@ -9,7 +16,7 @@
   right: 15px;
   bottom: 15px;
   border-radius: 15px;
-  background-color: rgb(133, 230, 247);
+  background-color: rgb(101, 225, 247);
   background-image: url('../../assets/Blogging.png'), url('../../assets/Blogging1.png');
   background-repeat: no-repeat, no-repeat;
   background-size: 13% 32%, 50% 130%;
@@ -24,8 +31,32 @@
   right: 15px;
   bottom: 15px;
   border-radius: 10px;
-  background-color: rgb(133, 247, 203);
+  background: linear-gradient(to bottom, #647ffa, #82e1f1, #82e1f1, #82e1f1);
   visibility: visible;
+  letter-spacing: 0.04em;
+  word-spacing: 0.08em;
+  box-shadow: 0;
+  transition: box-shadow 0.5s;
+}
+
+.dashboard-card-post:hover {
+  box-shadow: 0 16px 30px rgba(0,0,0,0.25), 
+                0 12px 12px rgba(0,0,0,0.22);
+}
+
+.title {
+  color: #000000;
+  font-family: serif;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.03em;
+}
+
+.content {
+  text-align: justify;
+  line-height: 1.3;
+  font-size: 17px;
+  font-family: 'Georgia', serif;
 }
 
 .success {
@@ -49,7 +80,16 @@ img {
 .username {
   position: absolute;
   left: 20%;
-  top: 10%;
+  top: 5%;font-family: Cursive;
+  font-weight: bold;
+  color: #4d1455;
+}
+
+.date {
+  position: absolute;
+  top: 50px;
+  right: 7%;
+  font-size: 12px;
 }
 
 .more-button {
@@ -93,6 +133,28 @@ input:focus, textarea:focus {
 }
 
 .btn:active {
-  transform: scale(0.92);
+  transform: scale(0.9);
 }
+
+.like{
+  position: absolute;
+  left: 20px;
+  bottom: 5px;
+  color: red;
+}
+
+.dislike{
+  position: absolute;
+  left: 20px;
+  bottom: 5px;
+}
+
+mat-icon {
+  transition: transform 80ms ease-in;
+}
+
+mat-icon:active{
+  transform: scale(0.3);
+}
+
 

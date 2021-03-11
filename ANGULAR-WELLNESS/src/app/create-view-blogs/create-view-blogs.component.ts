@@ -45,7 +45,7 @@ export class CreateViewBlogsComponent implements OnInit{
   retrievedImage: any;
   base64Data: any;
   retrieveResponse: any;
-
+  
   constructor(private breakpointObserver: BreakpointObserver, private userService: UserService, private blogService: BlogService,
      private route: ActivatedRoute) {}
     
@@ -59,20 +59,19 @@ export class CreateViewBlogsComponent implements OnInit{
         this.blogService.approvedBlogs().subscribe(
           data=> {
             this.blogList=data;
-            console.log(this.blogList);
             
-            this.blogList.forEach(element => {
-              this.userService.downloadImage(element.userId).subscribe(
-                res => {
-                  this.retrieveResponse = res;
-                  this.base64Data = this.retrieveResponse.data;
-                  this.retrievedImage = 'data:image/png;base64,' + this.base64Data;
-                  if(element.userId==this.retrieveResponse.userId){
-                  this.blogImage.push(this.retrievedImage);
-                  }
-                  console.log(this.blogImage);
-                });
-            });
+            // this.blogList.forEach(element => {
+            //   this.userService.downloadImage(element.userId).subscribe(
+            //     res => {
+            //       this.retrieveResponse = res;
+            //       this.base64Data = this.retrieveResponse.data;
+            //       this.retrievedImage = 'data:image/png;base64,' + this.base64Data;
+            //       if(element.userId==this.retrieveResponse.userId){
+            //       this.blogImage.push(this.retrievedImage);
+            //       }
+            //       console.log(this.blogImage);
+            //     });
+            // });
           }
         );
         
@@ -107,7 +106,6 @@ export class CreateViewBlogsComponent implements OnInit{
           $(".success").css({"visibility":"visible","opacity": "1", "transition": "opacity 0.8s linear"});
           
           setTimeout(() => {
-            console.log("sgfsg");
             $(".form").css({"visibility":"visible","opacity": "1", "transition": "opacity 0.8s linear"});
             $(".success").css({"opacity": "0", "visibility": "hidden", "transition": "visibility 0s 1s, opacity 0.5s linear"});
           },2000)
@@ -116,13 +114,32 @@ export class CreateViewBlogsComponent implements OnInit{
           this.blogService.approvedBlogs().subscribe(
             data=> {
               this.blogList=data;
-              console.log(this.blogList);
             }
           );
           this.blogForm.reset();
         }
       }
     );
+  }
+  convert: string;
+  blogDate: Date;
+  year: number;
+  month: number;
+  day: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  posted(blogPosted) {
+    for(var i in blogPosted) {
+      this.year = blogPosted[0];
+      this.day = blogPosted[1];
+      this.month = blogPosted[2];
+      this.hours = blogPosted[3];
+      this.minutes = blogPosted[4];
+      this.seconds = blogPosted[5];
+      this.convert = this.day+"-"+this.month+"-"+this.year+" "+this.hours+":"+this.minutes+":"+this.seconds;
+      this.blogDate = new Date(this.convert);
+    }
   }
 
   get BlogTitle() {
@@ -132,4 +149,33 @@ export class CreateViewBlogsComponent implements OnInit{
   get BlogContent() {
     return this.blogForm.get("description");
   }
+
+  dislike=false;
+
+  liked(blogId) {
+    console.log(blogId + " kai");
+
+    this.blogService.addLike(blogId, this.currentUser.userId).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+
+    $(".dislike").css({"opacity": "0", "visibility": "hidden", "transition": "visibility 0s 1s, opacity 0.2s linear"});
+    $(".like").css({"visibility":"visible","opacity": "1", "transition": "opacity 0.8s linear"});
+  }
+
+  disliked(blogId) {
+    console.log(blogId + " kai");
+
+    this.blogService.removeLike(blogId, this.currentUser.userId).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+
+    $(".dislike").css({"visibility":"visible","opacity": "1", "transition": "opacity 0.8s linear"});
+    $(".like").css({"opacity": "0", "visibility": "hidden", "transition": "visibility 0s 1s, opacity 0.2s linear"});
+  }
+
 }

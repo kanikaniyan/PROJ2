@@ -22,4 +22,12 @@ export class BlogService {
     return this.http.get(`${this.baseUrl}`+'blog-list');
   }
 
+  addLike(blogId: number, userId:number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/add-like/${userId}/${blogId}`, { responseType: 'text' });
+  }
+  
+  removeLike(blogId: number, userId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/remove-like/${userId}/${blogId}`, { responseType: 'text' });  
+  }
+
 }
