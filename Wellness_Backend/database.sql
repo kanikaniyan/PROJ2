@@ -21,6 +21,7 @@ id varchar(255) not null,
 data longblob,
 fileName varchar(255),
 fileType varchar(255),
+userId int,
 primary key (id)
 );
 select * from image;
@@ -73,6 +74,9 @@ likes boolean not null,
 userId int not null,
 primary key (likeId)
 );
+
+select count(*) as Likes from likestore where buserId=6 and likes=true;
+select count(l.likes) from LikeStore l where likes=true and bUserId=5;
 
 select * from likestore;
 delete from likestore where likeid=2;

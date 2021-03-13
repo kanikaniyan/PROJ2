@@ -53,7 +53,6 @@
         
             <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="active-user-list">Blog Posts</a> -->
             <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['create-view-blog', {'paramKey': currentUser.userId}]">Create a Blog</a>
-            <a mat-list-item routerLinkActive="list-item-active">Apply Jobs</a>
             <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['approved-blog', {'paramKey': currentUser.userId}]">Blogs Status</a>
             
             <mat-divider></mat-divider>
