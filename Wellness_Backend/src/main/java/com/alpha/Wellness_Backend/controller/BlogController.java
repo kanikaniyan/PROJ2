@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alpha.Wellness_Backend.model.Blog;
-import com.alpha.Wellness_Backend.model.BlogComments;
 import com.alpha.Wellness_Backend.service.IBlogService;
 
 @RestController
@@ -31,16 +30,16 @@ public class BlogController {
 	}
 
 	@GetMapping("blog-list")
-	public List<Blog> allBlogs() {
+	public List<Blog> allApprovedBlogs() {
 		return blogService.getAllBlogs();
 	}
 	
-	@DeleteMapping("delete-blog/{blog}")
-	public boolean deleteUser(@PathVariable("blog") Blog blog) {
-		return blogService.deleteBlog(blog);
+	@DeleteMapping("delete-blog/{blogId}")
+	public boolean deleteUser(@PathVariable("blogId") int blogId) {
+		return blogService.deleteBlog(blogId);
 	}
 	
-	@GetMapping("blog/{blogId}")
+	@GetMapping("oneBlog/{blogId}")
 	public Blog blogById(@PathVariable("blogId") int blogId) {
 		return blogService.getBlogById(blogId);
 	}
@@ -49,6 +48,21 @@ public class BlogController {
 	public boolean updateBlog(@RequestBody Blog blog, @PathVariable("blogId") int blogId) {
 		blog.setBlogId(blogId);
 		return blogService.updateBlog(blog);
+	}
+	
+	@GetMapping("notApprovedBlogs")
+	public List<Blog> getAllNotApprovedBlog() {
+		return blogService.getAllNotApprovedBlog();
+	}
+	
+	@PostMapping("approveABlog/{blogId}")
+	public boolean approveABlog(@RequestBody Blog blog, @PathVariable("blogId") int blogId) {
+		return blogService.approveABlog(blogId);
+	}
+	
+	@GetMapping("allApprovedBlogs/{userId}")
+	public List<Blog> getAllApprovedBlogById(@PathVariable("userId") int userId) {
+		return blogService.getAllApprovedBlogById(userId);
 	}
 	
 }

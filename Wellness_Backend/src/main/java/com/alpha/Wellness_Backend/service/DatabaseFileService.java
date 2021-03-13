@@ -1,6 +1,9 @@
 package com.alpha.Wellness_Backend.service;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,5 +58,9 @@ public class DatabaseFileService {
 
 	public boolean removeImg(int userId) {
 		return dbFileRepository.removeImage(userId);
+	}
+
+	public List<Image> getAllImages() {
+		return dbFileRepository.getAllImages();
 	}
 }

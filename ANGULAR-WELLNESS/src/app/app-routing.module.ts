@@ -10,6 +10,9 @@ import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { CreateViewBlogsComponent } from './create-view-blogs/create-view-blogs.component';
+import { NotApprovedBlogsComponent } from './not-approved-blogs/not-approved-blogs.component';
+import { ApprovedBlogsComponent } from './approved-blogs/approved-blogs.component';
+import { ViewBlogsComponent } from './view-blogs/view-blogs.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'signin-signup', pathMatch: 'full' },
@@ -24,7 +27,10 @@ const routes: Routes = [
         { path: 'active-user-list', component: ActivateUserComponent },
         { path: 'deactive-user-list', component: DeActivateUserComponent },
         { path: 'profile-page', component: ProfilePageComponent },
-        { path: 'create-view-blog', component: CreateViewBlogsComponent }
+        { path: 'create-view-blog', component: CreateViewBlogsComponent },
+        { path: 'view-blogs', component: ViewBlogsComponent },
+        { path: 'approve-a-blog', component: NotApprovedBlogsComponent },
+        { path: 'approved-blog', component: ApprovedBlogsComponent }
       ]},
     
   { path: 'add-user', component: RegisterUserComponent },

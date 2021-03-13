@@ -64,6 +64,10 @@ export class UserService {
       return this.http.get(`http://localhost:8080/image/downloadFile/${userId}`);
     }
 
+    getAllImages(): Observable<any> {
+      return this.http.get(`http://localhost:8080/image/all-images`);
+    }
+
     removeImage(userId: number): Observable<object> {
       return this.http.delete(`http://localhost:8080/image/remove-image/${userId}`);
     }

@@ -32,6 +32,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CreateViewBlogsComponent } from './create-view-blogs/create-view-blogs.component';
+import { NotApprovedBlogsComponent } from './not-approved-blogs/not-approved-blogs.component';
+import { ApprovedBlogsComponent } from './approved-blogs/approved-blogs.component';
+import { ViewBlogsComponent } from './view-blogs/view-blogs.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { CreateViewBlogsComponent } from './create-view-blogs/create-view-blogs.
     DeActivateUserComponent,
     AdminPageComponent,
     ProfilePageComponent,
-    CreateViewBlogsComponent
+    CreateViewBlogsComponent,
+    NotApprovedBlogsComponent,
+    ApprovedBlogsComponent,
+    ViewBlogsComponent
   ],
   imports: [
     BrowserModule,

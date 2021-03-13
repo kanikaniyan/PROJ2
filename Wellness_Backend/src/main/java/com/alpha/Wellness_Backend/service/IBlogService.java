@@ -11,5 +11,8 @@ public interface IBlogService {
 	Blog getBlogById(int blogId);
 	boolean addBlog(Blog blog);
 	boolean updateBlog(Blog blog);
-	boolean deleteBlog(Blog blog);
+	boolean deleteBlog(int blogId);
+	List<Blog> getAllNotApprovedBlog();
+	boolean approveABlog(int blogId);
+	List<Blog> getAllApprovedBlogById(int userId);
 }

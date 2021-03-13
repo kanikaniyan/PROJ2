@@ -48,8 +48,23 @@ public class BlogServiceImpl implements IBlogService{
 	}
 
 	@Override
-	public boolean deleteBlog(Blog blog) {
-		return blogDao.deleteBlog(blog);
+	public boolean deleteBlog(int blogId) {
+		return blogDao.deleteBlog(blogId);
+	}
+
+	@Override
+	public List<Blog> getAllNotApprovedBlog() {
+		return blogDao.getAllNotApprovedBlogs();
+	}
+
+	@Override
+	public boolean approveABlog(int blogId) {
+		return blogDao.approveABlog(blogId);
+	}
+
+	@Override
+	public List<Blog> getAllApprovedBlogById(int userId) {
+		return blogDao.getAllApprovedBlogById(userId);
 	}
 	
 }

@@ -10,3 +10,13 @@
     right: 0;
     background: #eee;
   }
+
+a:focus, a:active {
+    outline: none;
+    color: lightsalmon;
+}
+
+a:hover {
+    color: unset;
+    text-underline-offset: unset;
+}

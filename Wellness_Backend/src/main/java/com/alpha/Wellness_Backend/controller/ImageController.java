@@ -54,6 +54,11 @@ public class ImageController {
         return img;
     }
     
+    @GetMapping("/all-images")
+    public List<Image> getAllImages() {
+    	return fileStorageService.getAllImages();
+    }
+    
     @DeleteMapping("/remove-image/{userId}")
     public boolean removeImage(@PathVariable int userId) {
     	return fileStorageService.removeImg(userId);

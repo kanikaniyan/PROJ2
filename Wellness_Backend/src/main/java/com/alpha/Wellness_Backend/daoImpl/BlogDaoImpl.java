@@ -21,7 +21,7 @@ public class BlogDaoImpl implements IBlogDao{
 	
 	@Override
 	public List<Blog> getAllBlogs() {
-		return sessionFactory.getCurrentSession().createQuery("from Blog", Blog.class).getResultList();
+		return sessionFactory.getCurrentSession().createQuery("from Blog where status='Approved'", Blog.class).getResultList();
 	}
 
 	@Override
@@ -68,14 +68,46 @@ public class BlogDaoImpl implements IBlogDao{
 	}
 
 	@Override
-	public boolean deleteBlog(Blog blog) {
+	public boolean deleteBlog(int blogId) {
 		try {
-			sessionFactory.getCurrentSession().delete(blog);
+			sessionFactory.getCurrentSession().delete(getBlogById(blogId));
+			try {
+				sessionFactory.getCurrentSession().createQuery("delete from LikeStore where blogId='"+blogId+"'");
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<Blog> getAllNotApprovedBlogs() {
+		return sessionFactory.getCurrentSession().createQuery("from Blog where status='Approval Pending'",Blog.class).getResultList();
+	}
+
+	@Override
+	public boolean approveABlog(int blogId) {
+		try {
+			Blog blog=getBlogById(blogId);
+			blog.setStatus("Approved");
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public List<Blog> getAllApprovedBlogById(int userId) {
+		String q="from Blog where userId='"+userId+"'";
+		Query query=sessionFactory.getCurrentSession().createQuery(q);
+		return query.getResultList();
 	}
 }

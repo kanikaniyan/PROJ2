@@ -1,7 +1,9 @@
 {
     "cSpell.ignoreWords": [
+        "blog",
         "datatables",
         "deactive",
+        "lefte",
         "lodown",
         "loginform",
         "mat",
@@ -9,6 +11,8 @@
         "sidenav",
         "signin",
         "signup",
+        "updat",
+        "user",
         "validateuser"
     ]
 }

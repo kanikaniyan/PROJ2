@@ -21,6 +21,14 @@ public class LikeStore extends DomainResponse implements Serializable{
 	int likeId;
 	int blogId;
 	int userId;
+	int bUserId;
+	
+	public int getbUserId() {
+		return bUserId;
+	}
+	public void setbUserId(int bUserId) {
+		this.bUserId = bUserId;
+	}
 	boolean likes;
 	
 	public int getBlogId() {

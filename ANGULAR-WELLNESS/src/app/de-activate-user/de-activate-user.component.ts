@@ -17,7 +17,6 @@ export class DeActivateUserComponent implements OnInit {
 
   users:Observable <User[]>;
   user: User=new User();
-  userList: any;
 
   activateMessage=false;
   

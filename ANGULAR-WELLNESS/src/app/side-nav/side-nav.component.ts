@@ -27,9 +27,13 @@ export class SideNavComponent implements OnInit {
               if(this.currentUser) {
                 this.userService.downloadImage(this.currentUser.userId).subscribe(
                   res => {
-                    this.retrieveResponse = res;
-                    this.base64Data = this.retrieveResponse.data;
-                    this.retrievedImage = 'data:image/png;base64,' + this.base64Data;
+                    if(res) {
+                      this.retrieveResponse = res;
+                      this.base64Data = this.retrieveResponse.data;
+                      this.retrievedImage = 'data:image/png;base64,' + this.base64Data;
+                    }else {
+                      console.log("No Image Found");
+                    }
                   });
               }    
             }

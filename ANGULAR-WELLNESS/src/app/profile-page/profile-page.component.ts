@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../user';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -24,8 +25,10 @@ export class ProfilePageComponent implements OnInit{
   retrieveResponse: any;
   message: string;
   imageName: any;
-  
-  constructor(private breakpointObserver: BreakpointObserver, private userService: UserService, private route: ActivatedRoute) {}
+  likeCounts: number;
+
+  constructor(private breakpointObserver: BreakpointObserver, private userService: UserService, private route: ActivatedRoute,
+    private blogService: BlogService) {}
 
   ngOnInit() {
     const param = this.route.snapshot.params['paramKey'];
@@ -36,12 +39,22 @@ export class ProfilePageComponent implements OnInit{
         if(this.currentUser) {
           this.userService.downloadImage(this.currentUser.userId).subscribe(
             res => {
-              this.retrieveResponse = res;
-              this.base64Data = this.retrieveResponse.data;
-              this.retrievedImage = 'data:image/png;base64,' + this.base64Data;
+              if(res) {
+                this.retrieveResponse = res;
+                this.base64Data = this.retrieveResponse.data;
+                this.retrievedImage = 'data:image/png;base64,' + this.base64Data;
+              }else {
+                console.log("No Image Found");
+              }
             });
         }
-      });  
+      });
+      
+      this.blogService.getLikesByUserId(this.id).subscribe(
+        data=> {
+          this.likeCounts=data;
+        }
+      );
   }
 
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(

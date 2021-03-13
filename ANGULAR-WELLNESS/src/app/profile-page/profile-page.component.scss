@@ -100,3 +100,37 @@
   width: 22%;
   color: black;
 }
+
+.heart {
+  position: absolute;
+  left: 10%;
+  top: 25%;
+  font-size: 170px;
+  color: rgb(10, 6, 255);
+  text-align: center;
+  cursor: default;
+}
+
+.count:hover {
+  cursor: default;
+  font-size: 100px;
+  left: 18%;
+}
+
+.count {
+  font-size: 80px;
+  position: absolute;
+  left: 19%;
+  top: 46.5%;
+  transition: font-size 0.5s, left 0.5s ;
+}
+
+.likeCount {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  font-size: 30px;
+  font-family: Cursive;
+}
+
+

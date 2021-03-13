@@ -61,6 +61,25 @@
 
         </mat-card-content>
 
+        <mat-card-content class="dashboard-card-content" *ngIf="currentUser && likeCounts && card.title=='Profile1'">
+          <mat-icon class="heart">favorite</mat-icon>
+          <div>
+            <span class="count">{{likeCounts}}</span>
+            <div class="likeCount">
+              <span>You got {{likeCounts}} likes overall !!</span>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-content class="dashboard-card-content" *ngIf="(!likeCounts) && card.title=='Profile1'">
+          <mat-icon class="heart">favorite</mat-icon>
+          <div>
+            <span class="count">{{likeCounts}}</span>
+            <div class="likeCount">
+              <span>You got no likes yet..</span>
+            </div>
+          </div>
+        </mat-card-content>
 
         <mat-card-content class="dashboard-card-content" *ngIf="currentUser && card.title=='Information'">
           <br/>

@@ -7,13 +7,6 @@
         <mat-card-header>
           <mat-card-title>
             Create a Blog
-            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu> -->
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
@@ -28,39 +21,32 @@
         </mat-card-content>
         <h2 class="success">your blog has been submitted for approval</h2>
       </mat-card>
-
-      <!-- <mat-card class="dashboard-card2" *ngIf="card.title=='Card 2'">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            
-          </div>
-        </mat-card-content>
-      </mat-card> -->
-
     </mat-grid-tile>
   </mat-grid-list>  
 
-  <mat-grid-list cols="3" rowHeight="500px">
+  <mat-grid-list cols="3" rowHeight="530px">
     <mat-grid-tile *ngFor="let blog of blogList" [colspan]=1 [rowspan]=1>
       <mat-card class="dashboard-card-post">
         <mat-card-header>
           <mat-card-title>
-            
-            <!-- <div *ngIf="retrievedImage.userId==blog.userId">
-              <img [src]="retrievedImage">
-            </div> -->
-            <!-- <div>
-              <img src="../../assets/dummy.png">
-            </div> -->
+            <img src="../../assets/dummy.png">
+            <div *ngFor="let image of imageList">
+              <div *ngIf="image.userId==blog.userId">
+                <img [src]="retrievedImage">
+                <div *ngIf="convertimage(image.data)"></div>
+             </div>   
+            </div>
             
             <div class="username">
               @{{blog.username}}<br/>
-            </div> 
+            </div>
+
+            <div *ngFor="let user of userList">
+              <div class="admin" *ngIf="user.userId==blog.userId && user.role=='Admin'">
+                  Admin
+              </div>
+            </div>
+
             <div class="date">
               <div *ngIf="blog.blogPosted">
                 {{convert |  date:'medium'}}
@@ -76,16 +62,22 @@
             <div class="title">{{blog.blogTitle}}</div><br/>
             <div class="content">
               {{blog.blogContent}}
-          </div>
+            </div>
           <mat-card-footer>
             <mat-divider style="position: absolute; left: 0%; bottom: 10%; width: 100%; border-top-width: 2px;"></mat-divider>
-
-            <span><button [hidden]="dislike" mat-icon-button class="dislike" (click)="liked(blog.blogId)">
-              <mat-icon style="font-size: 25px; color: lightgoldenrodyellow;">favorite</mat-icon>
-            </button></span>
-            <span><button [hidden]="!dislike" mat-icon-button class="like" (click)="disliked(blog.blogId)">
-              <mat-icon style="font-size: 25px; color: red;">favorite</mat-icon>
-            </button></span>
+            <div *ngIf="currentUser">
+              <span><button mat-icon-button class="dislikeDefault" (click)="liked(blog.blogId, blog.userId)">
+                <mat-icon style="font-size: 25px; color: lightgoldenrodyellow;">favorite</mat-icon>
+              </button></span>
+            <div *ngFor="let likeScan of likeData">
+              <span *ngIf="(blog.blogId==likeScan.blogId && likeScan.likes==false) || !likeScan.userId" [hidden]="dislike"><button mat-icon-button class="dislike" (click)="liked(blog.blogId, blog.userId)">
+                <mat-icon style="font-size: 25px; color: lightgoldenrodyellow;">favorite</mat-icon>
+              </button></span>
+              <span *ngIf="blog.blogId==likeScan.blogId && likeScan.likes==true" [hidden]="!dislike"><button mat-icon-button class="like" (click)="disliked(blog.blogId)">
+                <mat-icon style="font-size: 25px; color: red;">favorite</mat-icon>
+              </button></span>
+            </div>
+          </div>
           </mat-card-footer>
           </mat-card-title>
         </mat-card-header>

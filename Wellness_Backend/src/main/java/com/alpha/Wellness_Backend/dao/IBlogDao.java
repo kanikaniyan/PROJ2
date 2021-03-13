@@ -11,5 +11,8 @@ public interface IBlogDao {
 	Blog getBlogById(int userId);
 	boolean addBlog(Blog blog);
 	boolean updateBlog(Blog blog);
-	boolean deleteBlog(Blog blog);
+	boolean deleteBlog(int blogId);
+	List<Blog> getAllNotApprovedBlogs();
+	boolean approveABlog(int blogId);
+	List<Blog> getAllApprovedBlogById(int userId);
 }

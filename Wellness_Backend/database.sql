@@ -39,6 +39,8 @@ create table Blog (
     primary key(BlogId)
 );
 select * from blog;
+select * from blog where userId=5;
+delete from blog where blogId=61;
 
 create table BlogComments (
 	BlogCommentsId int not null auto_increment,
@@ -63,3 +65,14 @@ create table Job(
     IsActive boolean,
     primary key(JobId)
 );
+
+create table LikeStore (
+likeId int not null auto_increment,
+blogId int not null,
+likes boolean not null,
+userId int not null,
+primary key (likeId)
+);
+
+select * from likestore;
+delete from likestore where likeid=2;

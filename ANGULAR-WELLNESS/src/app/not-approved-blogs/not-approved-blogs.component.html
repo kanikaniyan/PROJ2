@@ -1,0 +1,37 @@
+<div class="background">
+    <div class="grid-container">
+      <h1 class="mat-h1" style="text-align: center;">Approve a Blog</h1>
+      <div [hidden]="nothing" class="nothing">You have no blogs to approve!</div>                    
+      <mat-grid-list cols="3" rowHeight="530px">
+        <mat-grid-tile *ngFor="let blog of blogList" [colspan]=1 [rowspan]=1>
+          <mat-card class="dashboard-card-post">
+            <mat-card-header>
+              <mat-card-title>
+                <div class="username">
+                  @{{blog.username}}<br/>
+                </div> 
+                <div class="date">
+                  <div *ngIf="blog.blogPosted">
+                    {{convert |  date:'medium'}}
+                    <div *ngIf="posted(blog.blogPosted)"></div>
+                  </div>
+                </div>
+    
+                <br/><br/><br/>
+                <mat-divider style="position: absolute; left: 18%; top: 15%; width: 82%; border-top-width: 2px;"></mat-divider>
+                <br/>
+                <div class="title">{{blog.blogTitle}}</div><br/>
+                <div class="content">
+                  {{blog.blogContent}}
+                </div>
+              <mat-card-footer>
+                <mat-divider style="position: absolute; left: 0%; bottom: 10%; width: 100%; border-top-width: 2px;"></mat-divider>
+                <button class="btn" (click)="approveABlog(blog.blogId)">Approve</button>
+              </mat-card-footer>
+              </mat-card-title>
+            </mat-card-header>
+          </mat-card>
+        </mat-grid-tile>    
+      </mat-grid-list>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="background">
+    <div class="grid-container">
+      <h1 class="mat-h1" style="text-align: center;">Your Blogs</h1>
+      <div [hidden]="nothing" class="nothing">You have no approved blogs!</div>                    
+      <mat-grid-list cols="3" rowHeight="540px">
+        <mat-grid-tile *ngFor="let blog of blogList" [colspan]=1 [rowspan]=1>
+          <mat-card class="dashboard-card-post">
+            <mat-card-header>
+              <mat-card-title>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item (click)="delete(blog.blogId)">delete</button>
+                  <button mat-menu-item data-backdrop="false"
+                  data-toggle="modal" data-target="#myModal" (click)="updateBlog(blog.blogId)">update</button>
+                </mat-menu>
+                <div class="username">
+                  @{{blog.username}}<br/>
+                </div> 
+                <div class="date">
+                  <div *ngIf="blog.blogPosted">
+                    {{convert |  date:'medium'}}
+                    <div *ngIf="posted(blog.blogPosted)"></div>
+                  </div>
+                </div>
+    
+                <br/><br/><br/>
+                <mat-divider style="position: absolute; left: 18%; top: 15%; width: 82%; border-top-width: 2px;"></mat-divider>
+                <br/>
+                <div class="title">{{blog.blogTitle}}</div><br/>
+                <div class="content">
+                  {{blog.blogContent}}
+                </div>
+              <mat-card-footer>
+                <mat-divider style="position: absolute; left: 0%; bottom: 10%; width: 100%; border-top-width: 2px;"></mat-divider>
+                <Span class="btn" *ngIf="blog.status=='Approved'">Approved</Span>
+                <Span class="btn" style="background-color: rgb(243, 73, 73);" *ngIf="blog.status=='Approval Pending'">Approval Pending</Span>
+              </mat-card-footer>
+              </mat-card-title>
+            </mat-card-header>
+          </mat-card>
+        </mat-grid-tile>    
+      </mat-grid-list>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <form [formGroup]="blogUpdateForm" #UpdatUser (ngSubmit)="updatBlog()">
+              <!--Model Header-->
+              <div class="modal-header">
+                  <h4 class="modal-title" style="text-align: center;">Update Blog</h4>
+              </div>
+
+              <!--Model-body-->
+              <div class="modal-body" *ngIf="oneBlog">
+                  <div [hidden]="isUpdated">
+                      
+                    <div class="form-group">
+                      <input type="hidden" class="form-control" formControlName="blogId"
+                      [(ngModel)]="oneBlog.blogId">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="name">Blog Title</label>
+                      <input type="text" class="form-control" formControlName="blogTitle"
+                      [(ngModel)]="oneBlog.blogTitle">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">First Name</label>
+                      <textarea type="text" rows="6" class="form-control" formControlName="blogContent"
+                          [(ngModel)]="oneBlog.blogContent"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="hidden" class="form-control" formControlName="userId"
+                          [(ngModel)]="oneBlog.userId"/>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="hidden" rows="6" class="form-control" formControlName="username"
+                          [(ngModel)]="oneBlog.username"/>
+                    </div>
+
+
+                  </div>
+                  <div [hidden]="!isUpdated">
+                      <h4>Blog Details Updated Successfully!</h4>
+                  </div>
+              </div>
+
+              <!--Modal footer-->
+              <div class="modal-footer" style="margin-top: -4%; height: 5%;">
+                  <button type="submit" class="btn1 btn-success"
+                      [hidden]="isUpdated">Update</button>
+                  <button type="button" class="btn1 btn-danger" data-dismiss="modal"
+                      (click)="changeIsUpdated()">Close</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

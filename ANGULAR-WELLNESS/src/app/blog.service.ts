@@ -18,16 +18,47 @@ export class BlogService {
     return this.http.post(`${this.baseUrl}`+'add-blog', blog);
   }
 
+  getBlogById(blogId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/oneBlog/${blogId}`);
+  }
+
+  getAllApprovedBlogs(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allApprovedBlogs/${userId}`);
+  }
+
+  getNotApprovedBlogs(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`+'notApprovedBlogs');
+  }
+
+  approveABlog(blogId: number): Observable<object> {
+    return this.http.post(`${this.baseUrl}/approveABlog/${blogId}`, { responseType: 'text' });
+  }
+
   approvedBlogs(): Observable<any> {
     return this.http.get(`${this.baseUrl}`+'blog-list');
   }
 
-  addLike(blogId: number, userId:number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/add-like/${userId}/${blogId}`, { responseType: 'text' });
+  updateBlog(blogId: number,  blog): Observable<any> {
+    return this.http.post(`${this.baseUrl}/update-blog/${blogId}`, blog);
+  }
+
+  deleteBlog(blogId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete-blog/${blogId}`);
+  }
+
+  addLike(blogId: number, bUserId:number, userId:number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/add-like/${userId}/${blogId}/${bUserId}`, { responseType: 'text' });
   }
   
   removeLike(blogId: number, userId: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/remove-like/${userId}/${blogId}`, { responseType: 'text' });  
   }
 
+  getAllLikesById(userId: number): Observable<object>{
+    return this.http.get(`${this.baseUrl}/like-list-by-id/${userId}`);
+  }
+
+  getLikesByUserId(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/likes-for-user/${userId}`);
+  }
 }
