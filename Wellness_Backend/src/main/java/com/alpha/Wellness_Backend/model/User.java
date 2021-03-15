@@ -29,6 +29,25 @@ public class User extends DomainResponse implements Serializable{
 	private boolean isOnline;
 	private boolean enabled;
 	
+	public User() {
+		
+	}
+	
+	public User(int userId, String firstName, String lastName, String username, String password, String email,
+			String role, String status, boolean isOnline, boolean enabled) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+		this.status = status;
+		this.isOnline = isOnline;
+		this.enabled = enabled;
+	}
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -88,6 +107,13 @@ public class User extends DomainResponse implements Serializable{
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
+				+ username + ", password=" + password + ", email=" + email + ", role=" + role + ", status=" + status
+				+ ", isOnline=" + isOnline + ", enabled=" + enabled + "]";
 	}
 	
 	
